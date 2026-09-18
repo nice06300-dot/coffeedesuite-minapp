@@ -1,488 +1,829 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07090d">
-
-<title>Coffee de Suite</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:
-    radial-gradient(circle at top,#142238 0%,#090c12 35%,#050609 72%);
-  color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  min-height:100vh;
-}
-
-.container{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding:24px 20px 60px;
-}
-
-/* LOGO */
-
-.hero{
-  display:flex;
-  justify-content:center;
-  padding:8px 0 34px;
-}
-
-.logo{
-  width:min(70vw,320px);
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:50%;
-  border:2px solid rgba(70,174,255,.75);
-
-  box-shadow:
-    0 0 28px rgba(42,147,255,.22),
-    0 18px 50px rgba(0,0,0,.55);
-}
-
-/* TITRE */
-
-.catalogue-title{
-  font-size:32px;
-  font-weight:850;
-  letter-spacing:-1px;
-  margin-bottom:22px;
-}
-
-/* PRODUITS */
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.product{
-  background:
-    linear-gradient(145deg,#181c25,#0f1117);
-
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:22px;
-  overflow:hidden;
-
-  box-shadow:
-    0 12px 30px rgba(0,0,0,.30);
-
-  transition:.2s ease;
-}
-
-.product:active{
-  transform:scale(.98);
-}
-
-/* IMAGE PRODUIT */
-
-.product-image{
-  height:180px;
-
-  background:
-    radial-gradient(circle at 50% 40%,#252b39,#151922 70%);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#59606d;
-  font-size:42px;
-}
-
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* INFORMATIONS */
-
-.product-info{
-  padding:15px;
-}
-
-.product-name{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:7px;
-}
-
-.product-description{
-  color:#8a909c;
-  font-size:13px;
-  line-height:1.4;
-
-  min-height:36px;
-  margin-bottom:14px;
-}
-
-.product-price{
-  font-size:20px;
-  font-weight:850;
-  margin-bottom:14px;
-}
-
-/* BOUTON */
-
-.product-button{
-  width:100%;
-  border:none;
-  border-radius:12px;
-
-  padding:11px 8px;
-
-  background:#fff;
-  color:#08090c;
-
-  font-size:13px;
-  font-weight:800;
-
-  cursor:pointer;
-}
-
-/* FICHE PRODUIT */
-
-.modal{
-  position:fixed;
-  inset:0;
-
-  background:rgba(3,4,7,.88);
-  backdrop-filter:blur(14px);
-
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-
-  z-index:1000;
-}
-
-.modal.active{
-  display:flex;
-}
-
-.modal-content{
-  width:100%;
-  max-width:520px;
-
-  background:#11141b;
-
-  border-radius:28px 28px 0 0;
-  border:1px solid rgba(255,255,255,.10);
-
-  padding:18px 20px 35px;
-
-  animation:slideUp .25s ease;
-}
-
-@keyframes slideUp{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
-}
-
-.close{
-  width:42px;
-  height:5px;
-
-  border-radius:20px;
-  background:#555b66;
-
-  margin:0 auto 22px;
-}
-
-.modal-image{
-  height:270px;
-
-  border-radius:20px;
-
-  background:
-    radial-gradient(circle,#252b39,#151922);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:50px;
-  color:#59606d;
-
-  margin-bottom:22px;
-  overflow:hidden;
-}
-
-.modal-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.modal-name{
-  font-size:27px;
-  font-weight:850;
-  margin-bottom:8px;
-}
-
-.modal-price{
-  font-size:22px;
-  font-weight:800;
-  margin-bottom:17px;
-}
-
-.modal-description{
-  color:#969ca8;
-  font-size:15px;
-  line-height:1.55;
-}
-
-/* MOBILE */
-
-@media(max-width:380px){
-
-  .container{
-    padding-left:15px;
-    padding-right:15px;
-  }
-
-  .products{
-    gap:12px;
-  }
-
-  .product-image{
-    height:160px;
-  }
-
-  .product-info{
-    padding:13px;
-  }
-
-  .product-name{
-    font-size:16px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Coffee de Suite</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #05080d;
+      --card: #0d131c;
+      --card2: #111a25;
+      --border: rgba(255,255,255,.08);
+      --text: #ffffff;
+      --muted: #929baa;
+      --blue: #168cff;
+      --blue2: #006ee6;
+      --green: #25D366;
+    }
+
+    html {
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #10243d 0%, #08111d 27%, #05080d 60%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 25px 16px 45px;
+    }
+
+    /* ===== EMBLÈME ===== */
+
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0 25px;
+    }
+
+    .logo {
+      display: block;
+      width: min(70vw, 320px);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(22,140,255,.55);
+      box-shadow:
+        0 0 25px rgba(22,140,255,.20),
+        0 20px 50px rgba(0,0,0,.50);
+    }
+
+    /* ===== CATALOGUE ===== */
+
+    .catalogue-title {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 13px;
+    }
+
+    .product {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.01)),
+        var(--card);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform .15s ease,
+        border-color .15s ease,
+        background .15s ease;
+    }
+
+    .product:active {
+      transform: scale(.975);
+      border-color: rgba(22,140,255,.45);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background:
+        radial-gradient(circle at center, #182536, #0b1119 72%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: rgba(255,255,255,.25);
+      font-size: 38px;
+      font-weight: 200;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-info {
+      padding: 13px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 750;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-short {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      min-height: 34px;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .product-button {
+      width: 100%;
+      padding: 10px 8px;
+      border-radius: 11px;
+      background: rgba(22,140,255,.12);
+      border: 1px solid rgba(22,140,255,.25);
+      color: #58aaff;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* ===== MODALE ===== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      max-height: 92vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      background:
+        linear-gradient(180deg, #121a25 0%, #080c12 100%);
+      border: 1px solid rgba(255,255,255,.10);
+      border-bottom: none;
+
+      border-radius: 28px 28px 0 0;
+
+      padding:
+        12px
+        18px
+        calc(24px + env(safe-area-inset-bottom));
+
+      transform: translateY(100%);
+      transition: transform .32s cubic-bezier(.2,.8,.2,1);
+
+      will-change: transform;
+    }
+
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .drag-handle {
+      width: 42px;
+      height: 5px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.25);
+      margin: 0 auto 15px;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.48);
+      color: white;
+      font-size: 23px;
+      line-height: 32px;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .modal-image {
+      width: 100%;
+      aspect-ratio: 1.25 / 1;
+      border-radius: 20px;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at center, #1b2b3e, #0a1018 72%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: rgba(255,255,255,.22);
+      font-size: 48px;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-details {
+      padding: 20px 3px 5px;
+    }
+
+    .modal-name {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      padding-right: 10px;
+    }
+
+    .modal-price {
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #62aeff;
+    }
+
+    .modal-description {
+      margin-top: 17px;
+      color: #b0b7c2;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ===== CONTACT ===== */
+
+    .contact-title {
+      margin-top: 25px;
+      margin-bottom: 11px;
+      color: #8d96a4;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-buttons {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-button {
+      min-height: 52px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      font-weight: 750;
+      transition: transform .15s ease;
+    }
+
+    .contact-button:active {
+      transform: scale(.98);
+    }
+
+    .telegram {
+      background: linear-gradient(135deg, #2496e8, #087ac7);
+      box-shadow: 0 10px 25px rgba(0,136,204,.15);
+    }
+
+    .whatsapp {
+      background: linear-gradient(135deg, #27d367, #159447);
+      box-shadow: 0 10px 25px rgba(37,211,102,.12);
+    }
+
+    .contact-icon {
+      font-size: 18px;
+    }
+
+    @media (min-width: 480px) {
+      .products {
+        gap: 16px;
+      }
+
+      .product-info {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
+
 
 <body>
 
-<main class="container">
+  <main class="container">
 
-  <section class="hero">
-    <img
-      class="logo"
-      src="65A9C388-991F-4901-9DD3-24C7876EA2F1.png"
-      alt="Coffee de Suite"
-    >
-  </section>
-
-
-  <h1 class="catalogue-title">Catalogue</h1>
-
-
-  <section class="products">
-
-    <!-- PRODUIT 01 -->
-
-    <article class="product">
-      <div class="product-image">+</div>
-
-      <div class="product-info">
-
-        <div class="product-name">
-          Produit 01
-        </div>
-
-        <div class="product-description">
-          Description du produit.
-        </div>
-
-        <div class="product-price">
-          00,00 €
-        </div>
-
-        <button
-          class="product-button"
-          onclick="openProduct(
-            'Produit 01',
-            '00,00 €',
-            'Description complète du produit 01.'
-          )"
-        >
-          Voir le produit
-        </button>
-
-      </div>
-    </article>
-
-
-    <!-- PRODUIT 02 -->
-
-    <article class="product">
-      <div class="product-image">+</div>
-
-      <div class="product-info">
-
-        <div class="product-name">
-          Produit 02
-        </div>
-
-        <div class="product-description">
-          Description du produit.
-        </div>
-
-        <div class="product-price">
-          00,00 €
-        </div>
-
-        <button
-          class="product-button"
-          onclick="openProduct(
-            'Produit 02',
-            '00,00 €',
-            'Description complète du produit 02.'
-          )"
-        >
-          Voir le produit
-        </button>
-
-      </div>
-    </article>
-
-
-    <!-- PRODUIT 03 -->
-
-    <article class="product">
-      <div class="product-image">+</div>
-
-      <div class="product-info">
-
-        <div class="product-name">
-          Produit 03
-        </div>
-
-        <div class="product-description">
-          Description du produit.
-        </div>
-
-        <div class="product-price">
-          00,00 €
-        </div>
-
-        <button
-          class="product-button"
-          onclick="openProduct(
-            'Produit 03',
-            '00,00 €',
-            'Description complète du produit 03.'
-          )"
-        >
-          Voir le produit
-        </button>
-
-      </div>
-    </article>
-
-
-    <!-- PRODUIT 04 -->
-
-    <article class="product">
-      <div class="product-image">+</div>
-
-      <div class="product-info">
-
-        <div class="product-name">
-          Produit 04
-        </div>
-
-        <div class="product-description">
-          Description du produit.
-        </div>
-
-        <div class="product-price">
-          00,00 €
-        </div>
-
-        <button
-          class="product-button"
-          onclick="openProduct(
-            'Produit 04',
-            '00,00 €',
-            'Description complète du produit 04.'
-          )"
-        >
-          Voir le produit
-        </button>
-
-      </div>
-    </article>
-
-  </section>
-
-</main>
-
-
-<!-- FICHE PRODUIT -->
-
-<div class="modal" id="productModal" onclick="closeProduct(event)">
-
-  <div class="modal-content">
-
-    <div class="close"></div>
-
-    <div class="modal-image">
-      +
+    <div class="hero">
+      <img
+        class="logo"
+        src="65A9C388-991F-4901-9DD3-24C7876EA2F1.png"
+        alt="Coffee de Suite"
+      >
     </div>
 
-    <div class="modal-name" id="modalName"></div>
+    <h1 class="catalogue-title">Catalogue</h1>
 
-    <div class="modal-price" id="modalPrice"></div>
+    <section class="products" id="products"></section>
 
-    <div
-      class="modal-description"
-      id="modalDescription">
+  </main>
+
+
+  <!-- ===== FICHE PRODUIT ===== -->
+
+  <div class="modal" id="productModal">
+
+    <div class="modal-content" id="modalContent">
+
+      <div class="drag-handle"></div>
+
+      <button
+        class="close-button"
+        id="closeButton"
+        aria-label="Fermer"
+      >
+        ×
+      </button>
+
+      <div class="modal-image" id="modalImage">
+        +
+      </div>
+
+      <div class="modal-details">
+
+        <div class="modal-name" id="modalName"></div>
+
+        <div class="modal-price" id="modalPrice"></div>
+
+        <div
+          class="modal-description"
+          id="modalDescription"
+        ></div>
+
+        <div class="contact-title">
+          Nous contacter
+        </div>
+
+        <div class="contact-buttons">
+
+          <a
+            class="contact-button telegram"
+            id="telegramButton"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contact-icon">✈</span>
+            Contacter sur Telegram
+          </a>
+
+          <a
+            class="contact-button whatsapp"
+            id="whatsappButton"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contact-icon">●</span>
+            Contacter sur WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
-</div>
-
 
 <script>
 
-function openProduct(name,price,description){
+  /*
+  ==================================================
+       PRODUITS
 
-  document.getElementById("modalName").textContent=name;
+       PLUS TARD, C'EST PRINCIPALEMENT CETTE
+       PARTIE QUE TU MODIFIERAS.
+  ==================================================
+  */
 
-  document.getElementById("modalPrice").textContent=price;
+  const products = [
 
-  document.getElementById("modalDescription").textContent=description;
+    {
+      name: "Produit 01",
+      price: "00,00 €",
+      short: "Description du produit.",
+      description:
+        "Description complète du produit 01. Les informations détaillées seront affichées ici.",
+      image: ""
+    },
 
-  document.getElementById("productModal").classList.add("active");
+    {
+      name: "Produit 02",
+      price: "00,00 €",
+      short: "Description du produit.",
+      description:
+        "Description complète du produit 02. Les informations détaillées seront affichées ici.",
+      image: ""
+    },
 
-  document.body.style.overflow="hidden";
-}
+    {
+      name: "Produit 03",
+      price: "00,00 €",
+      short: "Description du produit.",
+      description:
+        "Description complète du produit 03. Les informations détaillées seront affichées ici.",
+      image: ""
+    },
+
+    {
+      name: "Produit 04",
+      price: "00,00 €",
+      short: "Description du produit.",
+      description:
+        "Description complète du produit 04. Les informations détaillées seront affichées ici.",
+      image: ""
+    }
+
+  ];
 
 
-function closeProduct(event){
+  /*
+  ==================================================
+       CONTACTS
+  ==================================================
+  */
 
-  if(
-    event.target.id==="productModal" ||
-    event.target.classList.contains("close")
-  ){
+  const TELEGRAM_USERNAME = "coffeedesuite06";
 
-    document.getElementById("productModal").classList.remove("active");
+  const WHATSAPP_NUMBER = "33775426696";
 
-    document.body.style.overflow="";
+
+  /*
+  ==================================================
+       CRÉATION AUTOMATIQUE DU CATALOGUE
+  ==================================================
+  */
+
+  const productsContainer =
+    document.getElementById("products");
+
+
+  function createCatalogue() {
+
+    productsContainer.innerHTML = "";
+
+    products.forEach((product, index) => {
+
+      const card = document.createElement("article");
+
+      card.className = "product";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+
+      card.innerHTML = `
+
+        <div class="product-image">
+
+          ${
+            product.image
+              ? `<img src="${product.image}" alt="${product.name}">`
+              : "+"
+          }
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-name">
+            ${product.name}
+          </div>
+
+          <div class="product-short">
+            ${product.short}
+          </div>
+
+          <div class="product-price">
+            ${product.price}
+          </div>
+
+          <div class="product-button">
+            Voir le produit
+          </div>
+
+        </div>
+      `;
+
+
+      card.addEventListener("click", () => {
+        openProduct(index);
+      });
+
+
+      card.addEventListener("keydown", event => {
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          openProduct(index);
+        }
+
+      });
+
+
+      productsContainer.appendChild(card);
+
+    });
+
   }
-}
+
+
+  /*
+  ==================================================
+       OUVERTURE PRODUIT
+  ==================================================
+  */
+
+  const modal =
+    document.getElementById("productModal");
+
+  const modalContent =
+    document.getElementById("modalContent");
+
+  const modalImage =
+    document.getElementById("modalImage");
+
+  const modalName =
+    document.getElementById("modalName");
+
+  const modalPrice =
+    document.getElementById("modalPrice");
+
+  const modalDescription =
+    document.getElementById("modalDescription");
+
+  const telegramButton =
+    document.getElementById("telegramButton");
+
+  const whatsappButton =
+    document.getElementById("whatsappButton");
+
+
+  function openProduct(index) {
+
+    const product = products[index];
+
+
+    modalName.textContent =
+      product.name;
+
+    modalPrice.textContent =
+      product.price;
+
+    modalDescription.textContent =
+      product.description;
+
+
+    if (product.image) {
+
+      modalImage.innerHTML =
+        `<img src="${product.image}" alt="${product.name}">`;
+
+    } else {
+
+      modalImage.innerHTML = "+";
+
+    }
+
+
+    /*
+       MESSAGE PRÉREMPLI
+    */
+
+    const message =
+      `Bonjour, je vous contacte au sujet de ${product.name}.`;
+
+
+    /*
+       TELEGRAM
+    */
+
+    telegramButton.href =
+      `https://t.me/${TELEGRAM_USERNAME}`;
+
+
+    /*
+       WHATSAPP
+    */
+
+    whatsappButton.href =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+  }
+
+
+  /*
+  ==================================================
+       FERMETURE
+  ==================================================
+  */
+
+  function closeProduct() {
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+    modalContent.style.transition = "";
+
+    modalContent.style.transform = "";
+
+  }
+
+
+  document
+    .getElementById("closeButton")
+    .addEventListener("click", closeProduct);
+
+
+  modal.addEventListener("click", event => {
+
+    if (event.target === modal) {
+      closeProduct();
+    }
+
+  });
+
+
+  document.addEventListener("keydown", event => {
+
+    if (
+      event.key === "Escape" &&
+      modal.classList.contains("active")
+    ) {
+      closeProduct();
+    }
+
+  });
+
+
+  /*
+  ==================================================
+       GLISSER VERS LE BAS POUR FERMER
+  ==================================================
+  */
+
+  let touchStartY = 0;
+  let touchCurrentY = 0;
+  let dragging = false;
+
+
+  modalContent.addEventListener(
+    "touchstart",
+    event => {
+
+      /*
+        Le glissement démarre seulement
+        lorsque la fiche est en haut.
+      */
+
+      if (modalContent.scrollTop > 0) {
+        return;
+      }
+
+      touchStartY =
+        event.touches[0].clientY;
+
+      touchCurrentY =
+        touchStartY;
+
+      dragging = true;
+
+      modalContent.style.transition = "none";
+
+    },
+    { passive: true }
+  );
+
+
+  modalContent.addEventListener(
+    "touchmove",
+    event => {
+
+      if (!dragging) return;
+
+      touchCurrentY =
+        event.touches[0].clientY;
+
+      const distance =
+        touchCurrentY - touchStartY;
+
+
+      if (distance > 0) {
+
+        modalContent.style.transform =
+          `translateY(${distance}px)`;
+
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  modalContent.addEventListener(
+    "touchend",
+    () => {
+
+      if (!dragging) return;
+
+      dragging = false;
+
+      const distance =
+        touchCurrentY - touchStartY;
+
+
+      modalContent.style.transition =
+        "transform .25s ease";
+
+
+      if (distance > 90) {
+
+        closeProduct();
+
+      } else {
+
+        modalContent.style.transform =
+          "translateY(0)";
+
+      }
+
+    }
+  );
+
+
+  /*
+  ==================================================
+       LANCEMENT
+  ==================================================
+  */
+
+  createCatalogue();
 
 </script>
 
