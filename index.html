@@ -3,106 +3,341 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="theme-color" content="#07090d">
   <title>Coffee de Suite</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #101010;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #171c25 0%, #090b10 32%, #050608 70%);
       color: white;
+      min-height: 100vh;
     }
 
-    header {
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-
-    .subtitle {
-      color: #aaa;
-      margin-top: 8px;
-    }
-
-    .catalogue {
-      padding: 15px;
-      max-width: 600px;
+    .container {
+      width: min(100%, 520px);
       margin: auto;
+      padding: 28px 18px 60px;
     }
 
-    .produit {
-      background: #1c1c1c;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 15px;
+    /* EMBLÈME */
+
+    .hero {
+      text-align: center;
+      padding: 15px 0 30px;
     }
 
-    .image {
-      height: 150px;
-      background: #292929;
-      border-radius: 14px;
+    .logo-wrap {
+      width: min(88vw, 390px);
+      aspect-ratio: 1;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(
+        135deg,
+        #42a5ff,
+        #ffffff,
+        #1976d2
+      );
+
+      box-shadow:
+        0 0 25px rgba(40,150,255,.30),
+        0 0 70px rgba(0,100,255,.12);
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 31px;
+      letter-spacing: 3px;
+      font-weight: 900;
+    }
+
+    .hero p {
+      color: #9298a3;
+      margin-top: 9px;
+      font-size: 14px;
+    }
+
+    /* RECHERCHE */
+
+    .search {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 17px;
+      padding: 15px 17px;
+      margin-bottom: 27px;
+    }
+
+    .search span {
+      font-size: 19px;
+      margin-right: 11px;
+    }
+
+    .search input {
+      width: 100%;
+      background: none;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 16px;
+    }
+
+    .search input::placeholder {
+      color: #777e89;
+    }
+
+    /* TITRES */
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      font-size: 21px;
+    }
+
+    .section-title span {
+      color: #777e89;
+      font-size: 13px;
+    }
+
+    /* CATÉGORIES */
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 30px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      white-space: nowrap;
+      padding: 11px 18px;
+      border-radius: 50px;
+      background: #151820;
+      border: 1px solid #252a34;
+      color: #c6cad1;
+      font-size: 14px;
+    }
+
+    .category.active {
+      background: white;
+      color: black;
+      font-weight: 700;
+    }
+
+    /* PRODUITS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: linear-gradient(145deg,#181b21,#101217);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .product-image {
+      height: 175px;
+      background:
+        radial-gradient(circle at center,#292e38,#151820);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 50px;
+      color: #656b75;
+      font-size: 38px;
     }
 
-    .prix {
-      font-size: 22px;
-      font-weight: bold;
+    .product-info {
+      padding: 16px;
     }
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #8d94a0;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .product-info h3 {
       font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+      margin-bottom: 7px;
+    }
+
+    .product-info p {
+      color: #747b86;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    /* MESSAGE BAS */
+
+    .coming {
+      margin-top: 30px;
+      padding: 25px 20px;
+      border-radius: 22px;
+      text-align: center;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .coming strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .coming p {
+      color: #7e8590;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #4e535c;
+      font-size: 11px;
+      padding-top: 35px;
+    }
+
+    @media (max-width: 360px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 27px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>COFFEE DE SUITE</h1>
-  <div class="subtitle">Catalogue test</div>
-</header>
+  <main class="container">
 
-<div class="catalogue">
+    <section class="hero">
 
-  <div class="produit">
-    <div class="image">📦</div>
-    <h2>Produit test 1</h2>
-    <p>Description du produit.</p>
-    <p class="prix">19,90 €</p>
-    <button>Voir le produit</button>
-  </div>
+      <div class="logo-wrap">
+        <img
+          class="logo"
+          src="65A9C388-991F-4901-9DD3-24C7876EA2F1.png"
+          alt="Coffee de Suite"
+        >
+      </div>
 
-  <div class="produit">
-    <div class="image">📦</div>
-    <h2>Produit test 2</h2>
-    <p>Description du produit.</p>
-    <p class="prix">29,90 €</p>
-    <button>Voir le produit</button>
-  </div>
+      <h1>COFFEE DE SUITE</h1>
+      <p>Catalogue • Nouvelle interface</p>
 
-  <div class="produit">
-    <div class="image">📦</div>
-    <h2>Produit test 3</h2>
-    <p>Description du produit.</p>
-    <p class="prix">39,90 €</p>
-    <button>Voir le produit</button>
-  </div>
+    </section>
 
-</div>
+    <div class="search">
+      <span>⌕</span>
+      <input type="text" placeholder="Rechercher dans le catalogue">
+    </div>
+
+    <div class="section-title">
+      <h2>Catégories</h2>
+      <span>Bientôt disponible</span>
+    </div>
+
+    <div class="categories">
+      <div class="category active">Tous</div>
+      <div class="category">Nouveautés</div>
+      <div class="category">Sélection</div>
+      <div class="category">Populaires</div>
+    </div>
+
+    <div class="section-title">
+      <h2>Catalogue</h2>
+      <span>Aperçu</span>
+    </div>
+
+    <section class="products">
+
+      <article class="card">
+        <div class="product-image">＋</div>
+        <div class="product-info">
+          <span class="badge">À venir</span>
+          <h3>Produit 01</h3>
+          <p>Emplacement réservé à ton futur produit.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="product-image">＋</div>
+        <div class="product-info">
+          <span class="badge">À venir</span>
+          <h3>Produit 02</h3>
+          <p>Emplacement réservé à ton futur produit.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="product-image">＋</div>
+        <div class="product-info">
+          <span class="badge">À venir</span>
+          <h3>Produit 03</h3>
+          <p>Emplacement réservé à ton futur produit.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="product-image">＋</div>
+        <div class="product-info">
+          <span class="badge">À venir</span>
+          <h3>Produit 04</h3>
+          <p>Emplacement réservé à ton futur produit.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="coming">
+      <strong>Catalogue en préparation</strong>
+      <p>
+        L'interface est actuellement en construction.
+        Les contenus seront ajoutés prochainement.
+      </p>
+    </div>
+
+    <footer>
+      COFFEE DE SUITE
+    </footer>
+
+  </main>
 
 </body>
 </html>
