@@ -1,238 +1,490 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07090d">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
 
-  <title>Coffee de Suite</title>
+<title>Coffee de Suite</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      background:
-        radial-gradient(circle at top, #142238 0%, #090c12 38%, #050609 75%);
-      color: white;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      min-height: 100vh;
-    }
+body{
+  background:
+    radial-gradient(circle at top,#142238 0%,#090c12 35%,#050609 72%);
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 520px;
-      margin: auto;
-      padding: 28px 22px 60px;
-    }
+.container{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  padding:24px 20px 60px;
+}
 
-    /* EMBLÈME */
+/* LOGO */
 
-    .hero {
-      text-align: center;
-      padding-top: 8px;
-      margin-bottom: 40px;
-    }
+.hero{
+  display:flex;
+  justify-content:center;
+  padding:8px 0 34px;
+}
 
-    .logo {
-      width: min(78vw, 360px);
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-      margin: auto;
+.logo{
+  width:min(70vw,320px);
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid rgba(70,174,255,.75);
 
-      border: 2px solid rgba(70, 174, 255, 0.75);
+  box-shadow:
+    0 0 28px rgba(42,147,255,.22),
+    0 18px 50px rgba(0,0,0,.55);
+}
 
-      box-shadow:
-        0 0 25px rgba(42, 147, 255, 0.25),
-        0 15px 50px rgba(0, 0, 0, 0.55);
-    }
+/* TITRE */
 
-    /* CATALOGUE */
+.catalogue-title{
+  font-size:32px;
+  font-weight:850;
+  letter-spacing:-1px;
+  margin-bottom:22px;
+}
 
-    .catalogue-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.7px;
-      margin-bottom: 22px;
-    }
+/* PRODUITS */
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
 
-    .product {
-      overflow: hidden;
-      border-radius: 24px;
-      background: linear-gradient(
-        145deg,
-        rgba(28, 32, 42, 0.96),
-        rgba(14, 16, 22, 0.96)
-      );
+.product{
+  background:
+    linear-gradient(145deg,#181c25,#0f1117);
 
-      border: 1px solid rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:22px;
+  overflow:hidden;
 
-      box-shadow:
-        0 12px 30px rgba(0,0,0,0.28);
-    }
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.30);
 
-    .product-image {
-      height: 185px;
+  transition:.2s ease;
+}
 
-      background:
-        radial-gradient(
-          circle at 50% 35%,
-          #252b39 0%,
-          #171b25 55%,
-          #11141b 100%
-        );
+.product:active{
+  transform:scale(.98);
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+/* IMAGE PRODUIT */
 
-      font-size: 48px;
-      color: rgba(255,255,255,0.28);
-    }
+.product-image{
+  height:180px;
 
-    .product-info {
-      padding: 18px 16px 21px;
-    }
+  background:
+    radial-gradient(circle at 50% 40%,#252b39,#151922 70%);
 
-    .coming {
-      color: #8d93a1;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 9px;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    .product h2 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
+  color:#59606d;
+  font-size:42px;
+}
 
-    .product p {
-      color: #747b89;
-      font-size: 14px;
-      line-height: 1.4;
-    }
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    .bottom-message {
-      margin-top: 30px;
-      padding: 24px 20px;
-      text-align: center;
+/* INFORMATIONS */
 
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-    }
+.product-info{
+  padding:15px;
+}
 
-    .bottom-message strong {
-      display: block;
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
+.product-name{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:7px;
+}
 
-    .bottom-message span {
-      color: #7f8591;
-      font-size: 14px;
-    }
+.product-description{
+  color:#8a909c;
+  font-size:13px;
+  line-height:1.4;
 
-    @media (max-width: 380px) {
-      .container {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
+  min-height:36px;
+  margin-bottom:14px;
+}
 
-      .products {
-        gap: 12px;
-      }
+.product-price{
+  font-size:20px;
+  font-weight:850;
+  margin-bottom:14px;
+}
 
-      .product-image {
-        height: 160px;
-      }
-    }
-  </style>
+/* BOUTON */
+
+.product-button{
+  width:100%;
+  border:none;
+  border-radius:12px;
+
+  padding:11px 8px;
+
+  background:#fff;
+  color:#08090c;
+
+  font-size:13px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+/* FICHE PRODUIT */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  background:rgba(3,4,7,.88);
+  backdrop-filter:blur(14px);
+
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+
+  z-index:1000;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-content{
+  width:100%;
+  max-width:520px;
+
+  background:#11141b;
+
+  border-radius:28px 28px 0 0;
+  border:1px solid rgba(255,255,255,.10);
+
+  padding:18px 20px 35px;
+
+  animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+
+.close{
+  width:42px;
+  height:5px;
+
+  border-radius:20px;
+  background:#555b66;
+
+  margin:0 auto 22px;
+}
+
+.modal-image{
+  height:270px;
+
+  border-radius:20px;
+
+  background:
+    radial-gradient(circle,#252b39,#151922);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:50px;
+  color:#59606d;
+
+  margin-bottom:22px;
+  overflow:hidden;
+}
+
+.modal-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.modal-name{
+  font-size:27px;
+  font-weight:850;
+  margin-bottom:8px;
+}
+
+.modal-price{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:17px;
+}
+
+.modal-description{
+  color:#969ca8;
+  font-size:15px;
+  line-height:1.55;
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+  .container{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .products{
+    gap:12px;
+  }
+
+  .product-image{
+    height:160px;
+  }
+
+  .product-info{
+    padding:13px;
+  }
+
+  .product-name{
+    font-size:16px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
+<main class="container">
 
-    <section class="hero">
-      <img
-        class="logo"
-        src="65A9C388-991F-4901-9DD3-24C7876EA2F1.png"
-        alt="Coffee de Suite"
-      >
-    </section>
-
-    <section>
-
-      <h1 class="catalogue-title">Catalogue</h1>
-
-      <div class="products">
-
-        <article class="product">
-          <div class="product-image">+</div>
-
-          <div class="product-info">
-            <div class="coming">À VENIR</div>
-            <h2>Produit 01</h2>
-            <p>Emplacement réservé.</p>
-          </div>
-        </article>
+  <section class="hero">
+    <img
+      class="logo"
+      src="65A9C388-991F-4901-9DD3-24C7876EA2F1.png"
+      alt="Coffee de Suite"
+    >
+  </section>
 
 
-        <article class="product">
-          <div class="product-image">+</div>
-
-          <div class="product-info">
-            <div class="coming">À VENIR</div>
-            <h2>Produit 02</h2>
-            <p>Emplacement réservé.</p>
-          </div>
-        </article>
+  <h1 class="catalogue-title">Catalogue</h1>
 
 
-        <article class="product">
-          <div class="product-image">+</div>
+  <section class="products">
 
-          <div class="product-info">
-            <div class="coming">À VENIR</div>
-            <h2>Produit 03</h2>
-            <p>Emplacement réservé.</p>
-          </div>
-        </article>
+    <!-- PRODUIT 01 -->
 
+    <article class="product">
+      <div class="product-image">+</div>
 
-        <article class="product">
-          <div class="product-image">+</div>
+      <div class="product-info">
 
-          <div class="product-info">
-            <div class="coming">À VENIR</div>
-            <h2>Produit 04</h2>
-            <p>Emplacement réservé.</p>
-          </div>
-        </article>
+        <div class="product-name">
+          Produit 01
+        </div>
+
+        <div class="product-description">
+          Description du produit.
+        </div>
+
+        <div class="product-price">
+          00,00 €
+        </div>
+
+        <button
+          class="product-button"
+          onclick="openProduct(
+            'Produit 01',
+            '00,00 €',
+            'Description complète du produit 01.'
+          )"
+        >
+          Voir le produit
+        </button>
 
       </div>
+    </article>
 
-      <div class="bottom-message">
-        <strong>Catalogue en préparation</strong>
-        <span>Les contenus seront ajoutés prochainement.</span>
+
+    <!-- PRODUIT 02 -->
+
+    <article class="product">
+      <div class="product-image">+</div>
+
+      <div class="product-info">
+
+        <div class="product-name">
+          Produit 02
+        </div>
+
+        <div class="product-description">
+          Description du produit.
+        </div>
+
+        <div class="product-price">
+          00,00 €
+        </div>
+
+        <button
+          class="product-button"
+          onclick="openProduct(
+            'Produit 02',
+            '00,00 €',
+            'Description complète du produit 02.'
+          )"
+        >
+          Voir le produit
+        </button>
+
       </div>
+    </article>
 
-    </section>
 
-  </main>
+    <!-- PRODUIT 03 -->
+
+    <article class="product">
+      <div class="product-image">+</div>
+
+      <div class="product-info">
+
+        <div class="product-name">
+          Produit 03
+        </div>
+
+        <div class="product-description">
+          Description du produit.
+        </div>
+
+        <div class="product-price">
+          00,00 €
+        </div>
+
+        <button
+          class="product-button"
+          onclick="openProduct(
+            'Produit 03',
+            '00,00 €',
+            'Description complète du produit 03.'
+          )"
+        >
+          Voir le produit
+        </button>
+
+      </div>
+    </article>
+
+
+    <!-- PRODUIT 04 -->
+
+    <article class="product">
+      <div class="product-image">+</div>
+
+      <div class="product-info">
+
+        <div class="product-name">
+          Produit 04
+        </div>
+
+        <div class="product-description">
+          Description du produit.
+        </div>
+
+        <div class="product-price">
+          00,00 €
+        </div>
+
+        <button
+          class="product-button"
+          onclick="openProduct(
+            'Produit 04',
+            '00,00 €',
+            'Description complète du produit 04.'
+          )"
+        >
+          Voir le produit
+        </button>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+
+<!-- FICHE PRODUIT -->
+
+<div class="modal" id="productModal" onclick="closeProduct(event)">
+
+  <div class="modal-content">
+
+    <div class="close"></div>
+
+    <div class="modal-image">
+      +
+    </div>
+
+    <div class="modal-name" id="modalName"></div>
+
+    <div class="modal-price" id="modalPrice"></div>
+
+    <div
+      class="modal-description"
+      id="modalDescription">
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function openProduct(name,price,description){
+
+  document.getElementById("modalName").textContent=name;
+
+  document.getElementById("modalPrice").textContent=price;
+
+  document.getElementById("modalDescription").textContent=description;
+
+  document.getElementById("productModal").classList.add("active");
+
+  document.body.style.overflow="hidden";
+}
+
+
+function closeProduct(event){
+
+  if(
+    event.target.id==="productModal" ||
+    event.target.classList.contains("close")
+  ){
+
+    document.getElementById("productModal").classList.remove("active");
+
+    document.body.style.overflow="";
+  }
+}
+
+</script>
 
 </body>
 </html>
